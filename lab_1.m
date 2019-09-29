@@ -20,8 +20,12 @@ surf(X,Y,Z)
 
 %% zeros vector
 z= zeros(5,1);
+disp('zeros vector =')
+disp(z);
 %matrix
 zz= zeros(5);
+disp('zeros matrix =')
+disp(zz);
 %% random matrix
 r=rand(1,5);
 disp('random matrix =')
