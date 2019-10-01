@@ -31,7 +31,7 @@ r=rand(1,5);
 disp('random matrix =')
 disp(r);
 
-%% complex
+%% complex_____incomplete
 acomp = uint8([1;2;3;4]);
 bcomp = uint8([2;2;7;7]);
 comp = complex(acomp,bcomp);
