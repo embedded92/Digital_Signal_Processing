@@ -4,7 +4,7 @@ vect = [1,2,3,4,5];
 disp('vector =')
 disp(vect);
 %% matrix
-matrix =[3,4,5;6,7,8;3,4,5];
+matrix =[3,4,6;6,7,8;3,4,5];
 disp('matrix =')
 disp(matrix);
 
