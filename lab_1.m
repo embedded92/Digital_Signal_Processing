@@ -37,3 +37,13 @@ bcomp = uint8([2;2;7;7]);
 comp = complex(acomp,bcomp);
 disp('complex vector =')
 disp(comp);
+
+%%problem 1 ...lab 2
+x = -5:15;
+y = dirac(x);
+%idx = y ;%== Inf; % find Inf
+y(4) = 3;
+y(6) = 2;
+y(9) = -1;
+y(13)=5;% set Inf to finite value
+stem(x,y)
