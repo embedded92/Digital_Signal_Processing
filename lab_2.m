@@ -17,3 +17,15 @@ stem(n1,x);
 title('Periodic Signal with 5 periods');
 xlabel('Discrete Time (n) \rightarrow');
 ylabel('Amplitude \rightarrow');
+
+%% Delta Function Signal Operation
+%Range of n
+n1=-5:15;
+yd=3*delta(n1+2)+2*delta(n1)-delta(n1-3)+5*delta(n1-7);
+% Plot the desired function
+figure
+stem(n1,yd);
+title('Plot for 3\delta(n+2)+2\delta(n)-\delta(n-3)+5\delta(n-7)');
+xlabel('Discrete Time (n) \rightarrow');
+ylabel('Amplitude \rightarrow');
+grid on;
