@@ -1,0 +1,75 @@
+clc;
+clear all;
+disp("Pulse Width Modulation System");
+a=input('Enter the number of bits for n-bit =  ');
+b=input('Enter the number of samples you want in a period = ');
+Length=2^a;
+%% Analog Signal Generation
+amp=0:2*pi/b:4*pi;     %no. of samples to be selected
+samp=8*sin(amp);       %dividing into 8 sets
+subplot(3,1,1);        %deviding the plan into 3 sub plots
+plot(samp, 'r');
+title('Sin Wave as Analog Signal');
+ylabel('Amplitude');
+xlabel('Time');
+
+%% Sampling Operation
+subplot(3,1,2);
+stem(samp);
+grid on;
+title('Sampling Operation');  ylabel('Amplitude');  xlabel('Time');
+
+%% Uniform Quantization Operation
+ upper_v=8;         % selecting the maximum for amplitude         
+ lower_v=-upper_v;  % selecting the minumum for amplitude 
+ step=(upper_v-lower_v)/Length;  % steps for sampling
+ part=lower_v:step:upper_v;      % levels range between upper_v and lower_v
+ code=lower_v-(step/2):step:upper_v+(step/2); % Quantized values
+% Quantization process
+ [ind,dec]=quantiz(samp,part,code);    % ind is for index number                                
+ len_1=length(ind);
+ len_2=length(dec);
+ for i=1:len_1          %loop begins for length 1, index values
+    if(ind(i)~=0)       % To make index as binary decimal 
+       ind(i)=ind(i)-1; % decrement the index to run the loop
+    end
+    i=i+1;              % incement the index to run the loop
+ end  
+  for i=1:len_2         %loop begins for length 3, for quantized values
+     if(dec(i)==lower_v-(step/2))   % To make quantized values between the levels
+         dec(i)=lower_v+(step/2);
+     end
+ end    
+ subplot(3,1,3);
+ stem(dec);grid on;             % Displaying Quantized values
+ title('Quantized Signal');
+ ylabel('Amplitude');
+ xlabel('Time');
+ 
+ %% Encoding Process
+ figure
+ code=de2bi(ind,'left-msb'); % Converting decimal to binary
+ k=1;
+for i=1:len_1
+    for j=1:a
+        coded(k)=code(i,j);  % converting code matrix to coded row vector
+        j=j+1;
+        k=k+1;
+    end
+    i=i+1;
+end
+ subplot(2,1,1); grid on;
+ stairs(coded);       % Displaying the encoded signal
+ axis([0 100 -2 3]);  % the limits and scaling   
+ title('Encoded Signal');
+ xlabel('Time'); ylabel('Amplitude');
+ 
+ 
+ %% Decoding
+ qunt=reshape(coded,a,length(coded)/a);  %seperating quantized quantity from encoded signal
+ index=bi2de(qunt','left-msb');          % Getting the index in decimal form
+ dec=step*index+lower_v+(step/2);        % getting the Quantized values
+ subplot(2,1,2); grid on;
+ plot(dec, 'r');                          % Plotting Demodulated signal
+ title('Decoded Signal');
+ xlabel('Time');  ylabel('Amplitude');
