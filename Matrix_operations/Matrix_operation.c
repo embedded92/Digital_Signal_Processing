@@ -1,6 +1,6 @@
 /*
  * homework_vector_0.c
- *
+ 
  *  Created on: Oct 15, 2019
  *      Author: ramneet
  */
