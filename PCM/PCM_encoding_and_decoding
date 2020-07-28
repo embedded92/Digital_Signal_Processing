@@ -10,6 +10,7 @@ amp=0:2*pi/b:4*pi;     %no. of samples to be selected
 samp=8*sin(amp);       %dividing into 8 sets
 subplot(3,1,1);        %deviding the plan into 3 sub plots
 plot(samp, 'r');
+
 title('Sin Wave as Analog Signal');
 ylabel('Amplitude');
 xlabel('Time');
